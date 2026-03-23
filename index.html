@@ -271,6 +271,11 @@
             alert("No hay datos para exportar. Seleccione un filtro.");
             return;
         }
+
+        // --- PASO CLAVE: ORDENAR ANTES DE EXPORTAR ---
+        // Ordenamos de mayor a menor según el número de electores
+        filtrados.sort((a, b) => b.electores - a.electores);
+        // --
     
         // 2. Formatear los datos para el Excel (Nombres de columnas bonitos)
         const datosExcel = filtrados.map(d => ({
