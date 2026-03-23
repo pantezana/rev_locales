@@ -12,6 +12,22 @@
         .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; }
         .table thead { background-color: #212529; color: white; }
         .badge-electores { background-color: #1a5c37; font-size: 0.9rem; }
+        @media print {
+            /* Escondemos lo que no queremos en el papel */
+            .header-serfor, .card-filtros, .loading-overlay, .btn {
+                display: none !important;
+            }
+            
+            /* Forzamos que la tabla ocupe todo el ancho */
+            .container { width: 100% !important; max-width: 100% !important; }
+            body { background-color: white !important; }
+            
+            /* Hacemos que el encabezado del reporte sea visible */
+            #printHeader { display: block !important; }
+            
+            /* Evitamos que una fila se corte a la mitad entre dos páginas */
+            tr { page-break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
@@ -44,8 +60,17 @@
                     <select id="selDist" class="form-select" disabled><option value="">Seleccione...</option></select>
                 </div>
             </div>
+            
             <div class="mt-3 text-end">
                 <small class="text-muted" id="txtConteo"></small>
+            </div>
+            <div class="row g-3">
+            </div>
+            <div class="mt-3 d-flex justify-content-between align-items-center">
+                <small class="text-muted" id="txtConteo"></small>
+                <button onclick="window.print()" class="btn btn-danger btn-sm">
+                    📄 Exportar a PDF / Imprimir
+                </button>
             </div>
         </div>
 
@@ -67,6 +92,18 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div id="printHeader" class="d-none d-print-block mb-4">
+    <h2 class="text-center">REPORTE DE LOCALES DE VOTACIÓN - EG 2026</h2>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <p><strong>Filtros aplicados:</strong> <span id="resumenFiltros"></span></p>
+        </div>
+        <div class="col-6 text-end">
+            <p id="resumenTotales"></p>
+        </div>
+    </div>
     </div>
 
     <script>
@@ -180,6 +217,22 @@
             // E. Mostrar el resumen (Locales + Suma de Electores)
             // .toLocaleString() sirve para poner los puntos de miles (ej: 10,500)
             txtConteo.innerText = `Total Locales: ${filtrados.length}    |     Total Mesas: ${totalMesas.toLocaleString()}     |     Total Electores: ${totalElectores.toLocaleString()}`;
+
+            // --- NUEVA PARTE PARA EL REPORTE PDF ---
+            const dptoTxt = selDpto.value || "Todos";
+            const provTxt = selProv.value || "Todas";
+            const distTxt = selDist.value || "Todos";
+        
+            // Escribimos los filtros en el encabezado invisible
+            document.getElementById('resumenFiltros').innerText = `${dptoTxt} > ${provTxt} > ${distTxt}`;
+            
+            // Escribimos los totales en el encabezado invisible
+            document.getElementById('resumenTotales').innerHTML = `
+                <strong>Locales:</strong> ${filtrados.length} <br>
+                <strong>Mesas:</strong> ${totalMesas.toLocaleString()} <br>
+                <strong>Electores:</strong> ${totalElectores.toLocaleString()}
+            `;
+            // ---------------------------------------
         }
 
         // Funciones auxiliares
