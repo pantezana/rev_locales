@@ -55,6 +55,8 @@
                     <tr>
                         <th style="width: 40%;">Local de Votación</th>
                         <th style="width: 40%;">Dirección</th>
+                        <th style="width: 40%;">Tipo</th>
+                        <th style="width: 40%;">N° Mesas</th>
                         <th style="width: 20%;" class="text-center">N° Electores</th>
                     </tr>
                 </thead>
@@ -162,6 +164,8 @@
                 <tr>
                     <td><div class="fw-bold text-uppercase">${d.local}</div></td>
                     <td><small class="text-secondary">${d.direccion}</small></td>
+                    <td><small class="text-secondary">${d.tipotec}</small></td>
+                    <td><small class="text-secondary">${d.mesas}</small></td>
                     <td class="text-center">
                         <span class="badge badge-electores">${d.electores.toLocaleString()}</span>
                     </td>
