@@ -159,20 +159,26 @@
             // ORDENAR DESCENDENTE (Más electores primero)
             filtrados.sort((a, b) => b.electores - a.electores);
 
+            // C. CÁLCULO DINÁMICO (Lo que estamos agregando)
+            // 'suma' empieza en 0 y va sumando el valor de 'local.electores' de cada fila
+            const totalElectores = filtrados.reduce((suma, local) => suma + local.electores, 0);
+
             // Renderizar
             tablaBody.innerHTML = filtrados.map(d => `
                 <tr>
                     <td><div class="fw-bold text-uppercase">${d.local}</div></td>
                     <td><small class="text-secondary">${d.direccion}</small></td>
-                    <td><small class="text-secondary">${d.tipotec}</small></td>
-                    <td><small class="text-secondary">${d.mesas}</small></td>
+                     <td class="text-center"><small class="text-secondary">${d.tipotec}</small></td>
+                     <td class="text-center"><small class="text-secondary">${d.mesas}</small></td>
                     <td class="text-center">
                         <span class="badge badge-electores">${d.electores.toLocaleString()}</span>
                     </td>
                 </tr>
             `).join('');
-
-            txtConteo.innerText = `Se encontraron ${filtrados.length} locales.`;
+          
+            // E. Mostrar el resumen (Locales + Suma de Electores)
+            // .toLocaleString() sirve para poner los puntos de miles (ej: 10,500)
+            txtConteo.innerText = `Se encontraron ${filtrados.length} locales | Total Electores: ${totalElectores.toLocaleString()}`;
         }
 
         // Funciones auxiliares
