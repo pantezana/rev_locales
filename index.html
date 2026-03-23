@@ -162,6 +162,7 @@
             // C. CÁLCULO DINÁMICO (Lo que estamos agregando)
             // 'suma' empieza en 0 y va sumando el valor de 'local.electores' de cada fila
             const totalElectores = filtrados.reduce((suma, local) => suma + local.electores, 0);
+            const totalMesas = filtrados.reduce((suma, local) => suma + (Number(local.mesas) || 0), 0);
 
             // Renderizar
             tablaBody.innerHTML = filtrados.map(d => `
@@ -178,7 +179,7 @@
           
             // E. Mostrar el resumen (Locales + Suma de Electores)
             // .toLocaleString() sirve para poner los puntos de miles (ej: 10,500)
-            txtConteo.innerText = `Se encontraron ${filtrados.length} locales | Total Electores: ${totalElectores.toLocaleString()}`;
+            txtConteo.innerText = `Total Locales: ${filtrados.length} | Total Mesas: ${totalMesas.toLocaleString()} | Total Electores: ${totalElectores.toLocaleString()}`;
         }
 
         // Funciones auxiliares
