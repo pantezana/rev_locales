@@ -36,6 +36,18 @@
         <div class="spinner-border text-success" role="status"></div>
         <p class="mt-2 fw-bold">Cargando base de datos...</p>
     </div>
+    <div id="printHeader" class="d-none d-print-block mb-4">
+    <h2 class="text-center">REPORTE DE LOCALES DE VOTACIÓN - EG 2026</h2>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <p><strong>Filtros aplicados:</strong> <span id="resumenFiltros"></span></p>
+        </div>
+        <div class="col-6 text-end">
+            <p id="resumenTotales"></p>
+        </div>
+    </div>
+    </div>
 
     <header class="header-serfor text-center">
         <div class="container">
@@ -93,18 +105,7 @@
             </table>
         </div>
     </div>
-    <div id="printHeader" class="d-none d-print-block mb-4">
-    <h2 class="text-center">REPORTE DE LOCALES DE VOTACIÓN - EG 2026</h2>
-    <hr>
-    <div class="row">
-        <div class="col-6">
-            <p><strong>Filtros aplicados:</strong> <span id="resumenFiltros"></span></p>
-        </div>
-        <div class="col-6 text-end">
-            <p id="resumenTotales"></p>
-        </div>
-    </div>
-    </div>
+
 
     <script>
         // CONFIGURACIÓN: Pega aquí tu URL de Google Apps Script
