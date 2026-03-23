@@ -98,7 +98,8 @@
                 <thead>
                     <tr>
                         <th style="width: 25%;">Local de Votación</th>
-                        <th style="width: 20%;">Distrito</th>
+                        <th style="width: 10%;">Provincia</th>
+                        <th style="width: 10%;">Distrito</th>
                         <th style="width: 25%;">Dirección</th>
                         <th style="width: 10%;">Tipo</th>
                         <th style="width: 10%;">N° Mesas</th>
@@ -214,6 +215,7 @@
             tablaBody.innerHTML = filtrados.map(d => `
                 <tr>
                     <td><div class="fw-bold text-uppercase">${d.local}</div></td>
+                    <td><small class="text-secondary">${d.provincia}</small></td>
                     <td><small class="text-secondary">${d.distrito}</small></td>
                     <td><small class="text-secondary">${d.direccion}</small></td>
                      <td class="text-center"><small class="text-secondary">${d.tipotec}</small></td>
